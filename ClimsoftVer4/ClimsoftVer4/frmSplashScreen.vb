@@ -1,5 +1,5 @@
 ﻿' CLIMSOFT - Climate Database Management System
-' Copyright (C) 2015
+' Copyright (C) 2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -23,11 +23,10 @@ Public NotInheritable Class frmSplashScreen
         frmMainMenu.Show()
         Me.Hide()
     End Sub
-    'TODO: This form can easily be set as the splash screen for the application by going to the "Application" tab
-    '  of the Project Designer ("Properties" under the "Project" menu).
-
 
     Private Sub SplashScreen_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        lblClimsoftVersion.Text = "Version " & My.Settings.climsoftVersion
+
         autoTranslate(Me)
         'Set up the dialog text at runtime according to the application's assembly information.  
 
@@ -68,15 +67,6 @@ Public NotInheritable Class frmSplashScreen
             Me.Hide()
             frmMainMenu.Show()
         End If
-
-    End Sub
-
-
-    Private Sub MainLayoutPanel_Paint(sender As Object, e As PaintEventArgs) Handles MainLayoutPanel.Paint
-
-    End Sub
-
-    Private Sub lblDescription_Click(sender As Object, e As EventArgs) Handles lblDescription.Click
 
     End Sub
 End Class

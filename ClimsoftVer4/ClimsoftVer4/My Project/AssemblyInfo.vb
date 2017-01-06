@@ -9,11 +9,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("ClimsoftVer4")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyTitle("CLIMSOFT")>
+<Assembly: AssemblyDescription("CLIMSOFT Climate Database Management System")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("ClimsoftVer4")>
-<Assembly: AssemblyCopyright("Copyright ©  2015")>
+<Assembly: AssemblyCopyright("Copyright ©  2017")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

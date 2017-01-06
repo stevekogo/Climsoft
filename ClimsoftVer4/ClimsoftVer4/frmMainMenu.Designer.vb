@@ -27,8 +27,8 @@ Partial Class frmMainMenu
         Me.mnuAccessories = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAccessoriesDewPointRH = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAccessoriesXMLOutput = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuQC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProducts = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuQC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAdministration = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetadataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -124,23 +124,16 @@ Partial Class frmMainMenu
         'mnuAccessoriesDewPointRH
         '
         Me.mnuAccessoriesDewPointRH.Name = "mnuAccessoriesDewPointRH"
-        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesDewPointRH.Tag = "Calculation_of_dew_Point_and_RH"
         Me.mnuAccessoriesDewPointRH.Text = "Calculation of dew Point and RH"
         '
         'mnuAccessoriesXMLOutput
         '
         Me.mnuAccessoriesXMLOutput.Name = "mnuAccessoriesXMLOutput"
-        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
-        '
-        'mnuQC
-        '
-        Me.mnuQC.Name = "mnuQC"
-        Me.mnuQC.Size = New System.Drawing.Size(41, 23)
-        Me.mnuQC.Tag = "QC"
-        Me.mnuQC.Text = "QC"
         '
         'mnuProducts
         '
@@ -148,6 +141,13 @@ Partial Class frmMainMenu
         Me.mnuProducts.Size = New System.Drawing.Size(75, 23)
         Me.mnuProducts.Tag = "Products"
         Me.mnuProducts.Text = "Products"
+        '
+        'mnuQC
+        '
+        Me.mnuQC.Name = "mnuQC"
+        Me.mnuQC.Size = New System.Drawing.Size(41, 23)
+        Me.mnuQC.Tag = "QC"
+        Me.mnuQC.Text = "QC"
         '
         'mnuAdministration
         '
@@ -207,7 +207,7 @@ Partial Class frmMainMenu
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
-        Me.mnuTools.Size = New System.Drawing.Size(53, 23)
+        Me.mnuTools.Size = New System.Drawing.Size(52, 23)
         Me.mnuTools.Tag = "Tools"
         Me.mnuTools.Text = "Tools"
         '
@@ -266,19 +266,19 @@ Partial Class frmMainMenu
         'AWSElementsToolStripMenuItem
         '
         Me.AWSElementsToolStripMenuItem.Name = "AWSElementsToolStripMenuItem"
-        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
+        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSElementsToolStripMenuItem.Text = "AWS Elements"
         '
         'AWSStationsToolStripMenuItem
         '
         Me.AWSStationsToolStripMenuItem.Name = "AWSStationsToolStripMenuItem"
-        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
+        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSStationsToolStripMenuItem.Text = "AWS Stations"
         '
         'mnuLanguageTranslation
         '
         Me.mnuLanguageTranslation.Name = "mnuLanguageTranslation"
-        Me.mnuLanguageTranslation.Size = New System.Drawing.Size(152, 23)
+        Me.mnuLanguageTranslation.Size = New System.Drawing.Size(151, 23)
         Me.mnuLanguageTranslation.Text = "Language Translation"
         '
         'mnuHelp
@@ -292,14 +292,14 @@ Partial Class frmMainMenu
         'mnuHelpContents
         '
         Me.mnuHelpContents.Name = "mnuHelpContents"
-        Me.mnuHelpContents.Size = New System.Drawing.Size(134, 24)
+        Me.mnuHelpContents.Size = New System.Drawing.Size(185, 24)
         Me.mnuHelpContents.Tag = "Contents"
         Me.mnuHelpContents.Text = "Contents"
         '
         'mnuHelpAbout
         '
         Me.mnuHelpAbout.Name = "mnuHelpAbout"
-        Me.mnuHelpAbout.Size = New System.Drawing.Size(134, 24)
+        Me.mnuHelpAbout.Size = New System.Drawing.Size(152, 24)
         Me.mnuHelpAbout.Tag = "About"
         Me.mnuHelpAbout.Text = "About"
         '
@@ -607,8 +607,8 @@ Partial Class frmMainMenu
         Me.ImeMode = System.Windows.Forms.ImeMode.[On]
         Me.IsMdiContainer = True
         Me.Name = "frmMainMenu"
-        Me.Tag = "Main_Menu"
-        Me.Text = "Main Menu"
+        Me.Tag = ""
+        Me.Text = "Climsoft"
         Me.Controls.SetChildIndex(Me.MenuStrip2, 0)
         Me.Controls.SetChildIndex(Me.Panel1, 0)
         Me.MenuStrip2.ResumeLayout(False)

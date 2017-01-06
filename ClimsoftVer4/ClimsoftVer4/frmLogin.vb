@@ -1,5 +1,5 @@
 ﻿' CLIMSOFT - Climate Database Management System
-' Copyright (C) 2015
+' Copyright (C) 2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -134,6 +134,8 @@ Public Class frmLogin
     'End Sub
 
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        lblClimsoftVersion.Text = My.Settings.climsoftVersion
+
         '-------Code for translation added 20160207,ASM
         'Translate text for controls on login form.
         'Other Translation after successful login will come from language translation table stored in database

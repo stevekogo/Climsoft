@@ -71,6 +71,15 @@ Namespace My
                 Return CType(Me("defaultRLocation"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("4.1")>  _
+        Public ReadOnly Property climsoftVersion() As String
+            Get
+                Return CType(Me("climsoftVersion"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

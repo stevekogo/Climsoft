@@ -1,5 +1,5 @@
 ﻿' CLIMSOFT - Climate Database Management System
-' Copyright (C) 2015
+' Copyright (C) 2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@ Imports ClimsoftVer4.Translations
 Public Class frmMainMenu
 
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Text = "Climsoft " & My.Settings.climsoftVersion
+
         Dim usrName, usrRole As String
         Dim i, maxRows As Integer
         usrRole = ""
@@ -201,7 +203,7 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
-
+        frmAbout.ShowDialog()
     End Sub
 
     Private Sub cmdKeyEntry_DoubleClick(sender As Object, e As EventArgs) Handles cmdKeyEntry.DoubleClick
