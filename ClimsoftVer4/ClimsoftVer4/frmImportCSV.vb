@@ -1,5 +1,5 @@
 ﻿' CLIMSOFT - Climate Database Management System
-' Copyright (C) 2015
+' Copyright (C) 2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 Public Class frmImportCSV
     Dim strFolderPath As String, strFileName As String, rec As Integer
     Dim sql As String
@@ -24,33 +25,8 @@ Public Class frmImportCSV
     Dim messageName As String, messageBoxAlert As String
 
     Private Sub frmImportCSV_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ' New language translation approach proposed as an alternative to using the Multilanguage tool provided by Microsoft. 20160206, ASM.
-        'Additional inline documentation is contained in the Class developed.
-        'New Class [clsLanguageTranslation] and Function [translateText] have been developed for translation. 201606, ASM
-
-        Dim ctrl As Control, TranslationInputText As String
-        Dim objTranslate As New clsLanguageTranslation
-
-        'Translate text for form title
-        TranslationInputText = Me.Tag
-        Me.Text = objTranslate.translateText(TranslationInputText)
-
-        'Translate text for lables and command buttons
-        For Each ctrl In Me.Controls      
-            If Strings.Left(ctrl.Name, 3) = "lbl" Or Strings.Left(ctrl.Name, 3) = "btn" Then
-                TranslationInputText = ctrl.Tag
-                ctrl.Text = objTranslate.translateText(TranslationInputText)
-            End If
-        Next ctrl
-
-        messageName = "msgNotYetImplemented"
-        'Translate message
-        TranslationInputText = messageName
-        messageBoxAlert = objTranslate.translateText(TranslationInputText)
-
         'Get CLICOM data folder from dataset for [regkeys] table 
         strClicomDataFolder = dsReg.Tables("regData").Rows(9).Item("keyValue")
-        
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -58,7 +34,6 @@ Public Class frmImportCSV
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
-
         Dim strConnString As String
         Dim maxRows As Integer, stnId As String, elemCode As String, yyyymm As String, obsDate As String, obsDay As String, obsHour As String, _
             obsLevel As String, obsVal As String, obsFlag As String, qcStatus As Integer, acquisitionType As Integer, n As Integer, _

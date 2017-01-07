@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports ClimsoftVer4.Translations
 
 
 Public NotInheritable Class frmSplashScreen
@@ -26,21 +25,6 @@ Public NotInheritable Class frmSplashScreen
 
     Private Sub SplashScreen_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         lblClimsoftVersion.Text = "Version " & My.Settings.climsoftVersion
-
-        autoTranslate(Me)
-        'Set up the dialog text at runtime according to the application's assembly information.  
-
-        'TODO: Customize the application's assembly information in the "Application" pane of the project 
-        '  properties dialog (under the "Project" menu).
-
-        'Application title
-        If My.Application.Info.Title <> "" Then
-
-            'ApplicationTitle.Text = My.Application.Info.Title
-        Else
-            'If the application title is missing, use the application name, without the extension
-            ' ApplicationTitle.Text = System.IO.Path.GetFileNameWithoutExtension(My.Application.Info.AssemblyName)
-        End If
 
         Timer1.Start()
 

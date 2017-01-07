@@ -48,7 +48,6 @@ Partial Class frmMainMenu
         Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSElementsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSStationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuLanguageTranslation = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
@@ -80,7 +79,7 @@ Partial Class frmMainMenu
         '
         Me.MenuStrip2.AllowItemReorder = True
         Me.MenuStrip2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInput, Me.mnuAccessories, Me.mnuProducts, Me.mnuQC, Me.mnuAdministration, Me.ChangeOwnPasswordToolStripMenuItem, Me.mnuTools, Me.mnuLanguageTranslation, Me.mnuHelp})
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInput, Me.mnuAccessories, Me.mnuProducts, Me.mnuQC, Me.mnuAdministration, Me.ChangeOwnPasswordToolStripMenuItem, Me.mnuTools, Me.mnuHelp})
         Me.MenuStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
@@ -275,12 +274,6 @@ Partial Class frmMainMenu
         Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSStationsToolStripMenuItem.Text = "AWS Stations"
         '
-        'mnuLanguageTranslation
-        '
-        Me.mnuLanguageTranslation.Name = "mnuLanguageTranslation"
-        Me.mnuLanguageTranslation.Size = New System.Drawing.Size(151, 23)
-        Me.mnuLanguageTranslation.Text = "Language Translation"
-        '
         'mnuHelp
         '
         Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpContents, Me.mnuHelpAbout})
@@ -292,7 +285,7 @@ Partial Class frmMainMenu
         'mnuHelpContents
         '
         Me.mnuHelpContents.Name = "mnuHelpContents"
-        Me.mnuHelpContents.Size = New System.Drawing.Size(185, 24)
+        Me.mnuHelpContents.Size = New System.Drawing.Size(152, 24)
         Me.mnuHelpContents.Tag = "Contents"
         Me.mnuHelpContents.Text = "Contents"
         '
@@ -667,7 +660,6 @@ Partial Class frmMainMenu
     Friend WithEvents FormHourlyTimeSelectionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChangeOwnPasswordToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConfigureDatabaseConnectionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mnuLanguageTranslation As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSElementsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSStationsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

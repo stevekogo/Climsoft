@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports ClimsoftVer4.Translations
 
 
 Public Class frmMainMenu
@@ -40,7 +39,6 @@ Public Class frmMainMenu
                 If usrRole = "ClimsoftOperator" Or usrRole = "ClimsoftOperatorSupervisor" Or usrRole = "ClimsoftRainfall" Then
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
                     mnuQC.Enabled = False
                     mnuProducts.Enabled = False
                     cmdDataTransfer.Enabled = False
@@ -53,7 +51,6 @@ Public Class frmMainMenu
                 ElseIf usrRole = "ClimsoftQC" Then
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
                     mnuProducts.Enabled = False
                     cmdDataTransfer.Enabled = False
                     cmdSettingsAWS.Enabled = False
@@ -66,7 +63,6 @@ Public Class frmMainMenu
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
                     mnuQC.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
                     cmdDataTransfer.Enabled = False
                     cmdSettingsAWS.Enabled = False
                     cmdUserManagement.Enabled = False
@@ -77,7 +73,6 @@ Public Class frmMainMenu
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
                     mnuQC.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
                     mnuProducts.Enabled = False
                     cmdDataTransfer.Enabled = False
                     cmdSettingsAWS.Enabled = False
@@ -101,7 +96,6 @@ Public Class frmMainMenu
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
-        autoTranslate(Me)
         HTMLHelp.HelpPage = "welcome.htm"
 
     End Sub
@@ -191,8 +185,6 @@ Public Class frmMainMenu
 
     Private Sub SelectLanguageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectLanguageToolStripMenuItem.Click
         frmLanguage.ShowDialog()
-        ' When dialog is closed - update language in this window (will any other windows also be open?)
-        autoTranslate(Me)
     End Sub
 
     ' Help Menu Items
@@ -236,10 +228,6 @@ Public Class frmMainMenu
 
     End Sub
 
-    Private Sub LanguageTranslationToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        frmLanguageTranslation.Show()
-    End Sub
-
     Private Sub PasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PasswordToolStripMenuItem.Click
         frmChangePassword.Show()
     End Sub
@@ -254,11 +242,6 @@ Public Class frmMainMenu
 
     Private Sub mnuTools_Click(sender As Object, e As EventArgs) Handles mnuTools.Click
 
-    End Sub
-
-    
-    Private Sub mnuLanguageTranslation_Click(sender As Object, e As EventArgs) Handles mnuLanguageTranslation.Click
-        frmLanguageTranslation.Show()
     End Sub
 
     Private Sub UserAdminToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserAdminToolStripMenuItem.Click
