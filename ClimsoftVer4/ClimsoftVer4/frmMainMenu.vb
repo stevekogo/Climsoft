@@ -100,7 +100,6 @@ Public Class frmMainMenu
 
     End Sub
 
-
     Private Sub cmdKeyEntry_Click(sender As Object, e As EventArgs) Handles cmdKeyEntry.Click
         ' The icon has been changed
         frmKeyEntry.ShowDialog()
@@ -136,14 +135,15 @@ Public Class frmMainMenu
         formAWSRealTime.Show()
     End Sub
 
-    Private Sub cmdRedCloseButton_Click(sender As Object, e As EventArgs) Handles cmdRedCloseButton.Click
-        End
-    End Sub
-
 
     ' Methods for menu items.
 
-    ' Input Menu items
+    ' "Database" Menu items
+    Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
+        End
+    End Sub
+
+    ' "Input" Menu items
     Private Sub mnuInputKeyEntry_Click(sender As Object, e As EventArgs) Handles mnuInputKeyEntry.Click
         frmKeyEntry.ShowDialog()
     End Sub
@@ -152,7 +152,17 @@ Public Class frmMainMenu
         formPaperArchive.Show()
     End Sub
 
-    ' Accessories Menu items
+    ' "QC" Menu items
+    Private Sub mnuQC_Click(sender As Object, e As EventArgs) Handles mnuQC.Click
+        frmQC.ShowDialog()
+    End Sub
+
+    ' "Products" Menu items
+    Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProducts.Click
+        frmProducts.ShowDialog()
+    End Sub
+
+    ' "Accessories" Menu items
     Private Sub mnuAccessoriesDewPointRH_Click(sender As Object, e As EventArgs) Handles mnuAccessoriesDewPointRH.Click
 
     End Sub
@@ -161,70 +171,49 @@ Public Class frmMainMenu
 
     End Sub
 
-    ' QC Menu items
-    Private Sub mnuQC_Click(sender As Object, e As EventArgs) Handles mnuQC.Click
-        frmQC.ShowDialog()
-    End Sub
-
-    ' Products menu items
-    Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProducts.Click
-        frmProducts.ShowDialog()
-    End Sub
-
-    ' Administration Menu items
-    ' (currently not implemeted)
-
-    ' Tools Menu Items
-    Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs)
-        formOptions.Show()
-    End Sub
-
+    ' "Tools" Menu Items
     Private Sub mnuToolsModifyForms_Click(sender As Object, e As EventArgs) Handles mnuToolsModifyForms.Click
 
-    End Sub
-
-    Private Sub SelectLanguageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectLanguageToolStripMenuItem.Click
-        frmLanguage.ShowDialog()
-    End Sub
-
-    ' Help Menu Items
-    Private Sub mnuHelpContents_Click(sender As Object, e As EventArgs) Handles mnuHelpContents.Click
-        'HTMLHelp.HelpPage = "aboutclimsoft4.htm"
-        Help.ShowHelp(Me, Application.StartupPath & "\" & HelpProvider1.HelpNamespace, HTMLHelp.HelpPage)
-
-    End Sub
-
-    Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
-        frmAbout.ShowDialog()
-    End Sub
-
-    Private Sub cmdKeyEntry_DoubleClick(sender As Object, e As EventArgs) Handles cmdKeyEntry.DoubleClick
-
-    End Sub
-
-    Private Sub DataFormsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DataFormsToolStripMenuItem.Click
-        frmDataForms.Show()
     End Sub
 
     Private Sub GenerlSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerlSettingsToolStripMenuItem.Click
         frmGeneralSettings.Show()
     End Sub
 
-    Private Sub SequencerConfigurationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SequencerConfigurationToolStripMenuItem.Click
-
+    Private Sub SelectLanguageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectLanguageToolStripMenuItem.Click
+        frmLanguage.ShowDialog()
     End Sub
 
+    ' Sequencer configuration submenu
+    Private Sub HourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem.Click
+        frmElementSequencerDaily.Show()
+    End Sub
     Private Sub DailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem.Click
         frmElementSequencerHourly.Show()
-
     End Sub
 
     Private Sub FormHourlyTimeSelectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormHourlyTimeSelectionToolStripMenuItem.Click
         frmHourlyTimeSelection.Show()
     End Sub
 
-    Private Sub HourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem.Click
-        frmElementSequencerDaily.Show()
+    ' AWS submenu
+    Private Sub AWSElementsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSElementsToolStripMenuItem.Click
+        frmAWSelements.Show()
+    End Sub
+    Private Sub AWSStationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSStationsToolStripMenuItem.Click
+        frmAWSstations.Show()
+    End Sub
+
+    Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
+        formOptions.Show()
+    End Sub
+
+    ' "Administration" Menu items
+    Private Sub UserAdminToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserAdminToolStripMenuItem.Click
+        frmUserManagement.Show()
+    End Sub
+
+    Private Sub MetadataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MetadataToolStripMenuItem.Click
 
     End Sub
 
@@ -232,27 +221,29 @@ Public Class frmMainMenu
         frmChangePassword.Show()
     End Sub
 
-    Private Sub ChangeOwnPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeOwnPasswordToolStripMenuItem.Click
-        frmChangeOwnPassword.Show()
+    Private Sub ChangeOwnPasswordToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ChangeOwnPasswordToolStripMenuItem1.Click
+        frmChangeOwnPassword.ShowDialog()
+    End Sub
+
+    Private Sub DataFormsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DataFormsToolStripMenuItem.Click
+        frmDataForms.Show()
+    End Sub
+
+    Private Sub UpdateElementsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateElementsToolStripMenuItem.Click
+
     End Sub
 
     Private Sub ConfigureDatabaseConnectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfigureDatabaseConnectionToolStripMenuItem.Click
         frmLogin.Server_db_port(frmLogin.cmbDatabases.Text)
     End Sub
 
-    Private Sub mnuTools_Click(sender As Object, e As EventArgs) Handles mnuTools.Click
-
+    ' Help Menu Items
+    Private Sub mnuHelpContents_Click(sender As Object, e As EventArgs) Handles mnuHelpContents.Click
+        'HTMLHelp.HelpPage = "aboutclimsoft4.htm"
+        Help.ShowHelp(Me, Application.StartupPath & "\" & HelpProvider1.HelpNamespace, HTMLHelp.HelpPage)
     End Sub
 
-    Private Sub UserAdminToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserAdminToolStripMenuItem.Click
-        frmUserManagement.Show()
-    End Sub
-
-    Private Sub AWSElementsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSElementsToolStripMenuItem.Click
-        frmAWSelements.Show()
-    End Sub
-
-    Private Sub AWSStationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSStationsToolStripMenuItem.Click
-        frmAWSstations.Show()
+    Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
+        frmAbout.ShowDialog()
     End Sub
 End Class

@@ -45,7 +45,7 @@ Partial Class frmLogin
         'lblUsername
         '
         Me.lblUsername.AutoSize = True
-        Me.lblUsername.Location = New System.Drawing.Point(210, 66)
+        Me.lblUsername.Location = New System.Drawing.Point(209, 69)
         Me.lblUsername.Name = "lblUsername"
         Me.lblUsername.Size = New System.Drawing.Size(55, 13)
         Me.lblUsername.TabIndex = 0
@@ -56,7 +56,7 @@ Partial Class frmLogin
         'lblPassword
         '
         Me.lblPassword.AutoSize = True
-        Me.lblPassword.Location = New System.Drawing.Point(210, 107)
+        Me.lblPassword.Location = New System.Drawing.Point(209, 110)
         Me.lblPassword.Name = "lblPassword"
         Me.lblPassword.Size = New System.Drawing.Size(53, 13)
         Me.lblPassword.TabIndex = 2
@@ -66,7 +66,7 @@ Partial Class frmLogin
         '
         'txtUsername
         '
-        Me.txtUsername.Location = New System.Drawing.Point(279, 63)
+        Me.txtUsername.Location = New System.Drawing.Point(278, 66)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(220, 20)
         Me.txtUsername.TabIndex = 1
@@ -74,7 +74,7 @@ Partial Class frmLogin
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(279, 104)
+        Me.txtPassword.Location = New System.Drawing.Point(278, 107)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(220, 20)
@@ -102,7 +102,7 @@ Partial Class frmLogin
         '
         'txtusrpwd
         '
-        Me.txtusrpwd.Location = New System.Drawing.Point(365, 12)
+        Me.txtusrpwd.Location = New System.Drawing.Point(380, 12)
         Me.txtusrpwd.Name = "txtusrpwd"
         Me.txtusrpwd.Size = New System.Drawing.Size(147, 20)
         Me.txtusrpwd.TabIndex = 6
@@ -122,12 +122,12 @@ Partial Class frmLogin
         '
         Me.lblDbdetails.AutoSize = True
         Me.lblDbdetails.ForeColor = System.Drawing.Color.Blue
-        Me.lblDbdetails.Location = New System.Drawing.Point(210, 155)
+        Me.lblDbdetails.Location = New System.Drawing.Point(316, 141)
         Me.lblDbdetails.Name = "lblDbdetails"
-        Me.lblDbdetails.Size = New System.Drawing.Size(233, 13)
+        Me.lblDbdetails.Size = New System.Drawing.Size(158, 13)
         Me.lblDbdetails.TabIndex = 8
         Me.lblDbdetails.Tag = "Show_and_Configure_Database_Connection"
-        Me.lblDbdetails.Text = "Show and Configure Database Connection........"
+        Me.lblDbdetails.Text = "Configure Database Connection"
         '
         'cmdHelp
         '

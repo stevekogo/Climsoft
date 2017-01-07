@@ -15,28 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-Module mainModule
-    Public tabNext As Boolean
-    Public regKeyName As String
-    Public regKeyValue As String
-    Public dsLanguageTable As New DataSet
-    Public daLanguageTable As New MySql.Data.MySqlClient.MySqlDataAdapter
-    Public languageTableSQL As String
-    Public dsReg As New DataSet
-    Public daReg As New MySql.Data.MySqlClient.MySqlDataAdapter
-    Public regSQL As String
-    Public dsClimsoftUserRoles As New DataSet
-    Public daClimsoftUserRoles As New MySql.Data.MySqlClient.MySqlDataAdapter
-    Public rolesSQL As String
-    Public userGroup As String
-    Public dsSourceTableName As String
-    Public connStrRemoteSvr As String
-    Public remoteSvr As String
-    Public msgKeyentryFormsListUpdated As String
-    Public msgStationInformationNotFound As String
-
-End Module
-
 Public Class formSynopRA1
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String

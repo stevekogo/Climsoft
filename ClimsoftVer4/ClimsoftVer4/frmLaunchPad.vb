@@ -16,6 +16,10 @@
 
 Public Class frmLaunchPad
 
+    Private Sub frmLaunchPad_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
     Private Sub btnStationInformation_Click(sender As Object, e As EventArgs) Handles btnStationInformation.Click
         formStation.Show()
     End Sub
@@ -47,13 +51,10 @@ Public Class frmLaunchPad
             FileClose(12)
             frmLogin.cmbDatabases.Text = dbconnectstr
             frmLogin.cmbDatabases.Refresh()
-            MsgBox("Database Details Updated", MsgBoxStyle.Information)
+            Me.Close()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
 
-    Private Sub frmLaunchPad_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 End Class

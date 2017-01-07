@@ -13,23 +13,44 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.Security.Principal
 
 
 Public Class frmLogin
     Public HTMLHelp As New clsHelp
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim line As String
-
     Dim sr As IO.StreamReader
 
 
-    ' TODO: Insert code to perform custom authentication using the provided username and password 
-    ' (See http://go.microsoft.com/fwlink/?LinkId=35339).  
-    ' The custom principal can then be attached to the current thread's principal as follows: 
-    '     My.User.CurrentPrincipal = CustomPrincipal
-    ' where CustomPrincipal is the IPrincipal implementation used to perform authentication. 
-    ' Subsequently, My.User will return identity information encapsulated in the CustomPrincipal object
-    ' such as the username, display name, etc.
+    Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        lblClimsoftVersion.Text = My.Settings.climsoftVersion
+        ' Only show link to change DB connection string if user is currently Administrator
+        lblDbdetails.Visible = New WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator)
+
+        ' FIXME
+        msgKeyentryFormsListUpdated = "List of key-entry forms updated!"
+        msgStationInformationNotFound = "Station information not found. Please add station information and try again!"
+
+
+        Try
+            sr = New IO.StreamReader("config.inf")
+        Catch ex As Exception
+            If TypeOf ex Is System.IO.FileNotFoundException Then
+                ' TODO: Log warning: "A required CLIMSOFT configuration file is missing. " & ex.Message
+                ' Try to recover by using the default settings:
+                ' My.MySettings.Default.defaultDatabase
+            Else
+                Throw
+            End If
+        End Try
+
+        line = sr.ReadLine()
+        cmbDatabases.Items.Add(line)
+
+        cmbDatabases.Text = cmbDatabases.Items.Item(0)
+        sr.Close()
+    End Sub
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
         ConfigFile()
@@ -87,12 +108,14 @@ Public Class frmLogin
             MsgBox(e.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
+
     Sub climsoftuserRoles()
         'Set SQL for populating user roles
         rolesSQL = "SELECT * from climsoftusers"
         daClimsoftUserRoles = New MySql.Data.MySqlClient.MySqlDataAdapter(rolesSQL, conn)
         daClimsoftUserRoles.Fill(dsClimsoftUserRoles, "userRoles")
     End Sub
+
     Sub languageTableInit()
         'Set SQL string for populating "regData" dataset
         languageTableSQL = "SELECT * from language_translation"     '
@@ -107,7 +130,6 @@ Public Class frmLogin
         daReg.Fill(dsReg, "regData")
     End Sub
 
-    ' End Module
     Sub Server_db_port(svrdbstr As String)
         Dim Ssvr, Esvr, Sdb, Edb As Integer
         Dim Svr_db_port, svrstr, dbstr, portstr As String
@@ -124,108 +146,20 @@ Public Class frmLogin
         frmLaunchPad.txtServer.Text = svrstr
         frmLaunchPad.txtDatabase.Text = dbstr
         frmLaunchPad.txtPort.Text = portstr
-        frmLaunchPad.Show()
+        frmLaunchPad.ShowDialog()
         frmLaunchPad.lblConection.Text = svrdbstr & "uid=" & txtUsername.Text & ";pwd=" & txtPassword.Text & ";Convert Zero Datetime=True"
-
     End Sub
-    'Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    'End Sub
-
-    Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        lblClimsoftVersion.Text = My.Settings.climsoftVersion
-
-        '-------Code for translation added 20160207,ASM
-        'Translate text for controls on login form.
-        'Other Translation after successful login will come from language translation table stored in database
-
-        msgKeyentryFormsListUpdated = "List of key-entry forms updated!"
-        msgStationInformationNotFound = "Station information not found. Please add station information and try again!"
-
-        Dim lanCulture As String
-        lanCulture = System.Globalization.CultureInfo.CurrentCulture.Name
-        If Strings.Left(lanCulture, 2) = "en" Then
-            ' MsgBox("Current language is: English-UK")
-            Me.Text = "Login"
-            lblUsername.Text = "User name:"
-            lblPassword.Text = "Password:"
-            lblDbdetails.Text = "Show and Configure Database Connection....."
-            OK.Text = "OK"
-            Cancel.Text = "Cancel"
-        ElseIf Strings.Left(lanCulture, 2) = "fr" Then
-            Me.Text = "s'identifier"
-            lblUsername.Text = "Nom d'utilisateur:"
-            lblPassword.Text = "Mot de passe:"
-            lblDbdetails.Text = "Afficher et configurer la base de données de connexion....."
-            OK.Text = "OK"
-            Cancel.Text = "Annuler"
-        ElseIf Strings.Left(lanCulture, 2) = "de" Then
-            Me.Text = "Anmeldung"
-            lblUsername.Text = "Benutzername:"
-            lblPassword.Text = "Passwort:"
-            lblDbdetails.Text = "Anzeige und Konfiguration der Verbindungsdatenbank....."
-            OK.Text = "OK"
-            Cancel.Text = "Stornieren"
-        ElseIf Strings.Left(lanCulture, 2) = "pt" Then
-            Me.Text = "Entrar"
-            lblUsername.Text = "Nome de usuário:"
-            lblPassword.Text = "Senha:"
-            lblDbdetails.Text = "Mostrar e configurar o banco de dados de conexão....."
-            OK.Text = "OK"
-            Cancel.Text = "Cancelar"
-        End If
-        '------------------
-        ' If the user's machine is set to an alternative language then this alternative will be used if available
-        'autoTranslate(Me)
-
-        Try
-            sr = New IO.StreamReader("config.inf")
-        Catch ex As Exception
-            If TypeOf ex Is System.IO.FileNotFoundException Then
-                ' TODO: Log warning: "A required CLIMSOFT configuration file is missing. " & ex.Message
-                ' Try to recover by using the default settings:
-                ' My.MySettings.Default.defaultDatabase
-            Else
-                Throw
-            End If
-        End Try
-
-        line = sr.ReadLine()
-        cmbDatabases.Items.Add(line)
-
-        cmbDatabases.Text = cmbDatabases.Items.Item(0)
-        sr.Close()
-
-    End Sub
-
 
     Private Sub lblDbdetails_Click(sender As Object, e As EventArgs) Handles lblDbdetails.Click
-        If lblDbdetails.Text = "Show and Configure Database Connection........" Then
-            'cmbDatabases.Visible = True
-            'sr.Close()
-            line = cmbDatabases.Text
-            Server_db_port(line)
-            'lblDbdetails.Text = "Hide Database Details........"
-        Else
-            frmLaunchPad.Close()
-            cmbDatabases.Visible = False
-            lblDbdetails.Text = "Show and Configure Database Connection........"
-        End If
-    End Sub
-
-    Private Sub cmbDatabases_Click(sender As Object, e As EventArgs) Handles cmbDatabases.Click
-
-    End Sub
-
-
-    Private Sub cmbDatabases_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDatabases.SelectedIndexChanged
-
+        ' Show dialog for editing connection details (frmLaunchPad)
+        line = cmbDatabases.Text
+        Server_db_port(line)
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         'HTMLHelp.HelpPage = "login.htm"
         'Help.ShowHelp(Me, Application.StartupPath & "\" & HelpProvider1.HelpNamespace, HTMLHelp.HelpPage)
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "login.htm")
-
     End Sub
+
 End Class
