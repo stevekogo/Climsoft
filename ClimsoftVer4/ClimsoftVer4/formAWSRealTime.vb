@@ -345,6 +345,7 @@ Err:
 
 
     Function DeleteRecord(tbl As String, recs As Integer) As Boolean
+        'MsgBox(1)
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
@@ -683,89 +684,76 @@ Err:
     End Sub
 
     Private Sub cmdCreate_Click(sender As Object, e As EventArgs) Handles cmdCreate.Click
-        On Error GoTo Err
+        'On Error GoTo Err
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
+
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim str As New DataSet
-        Dim dsNewRow As DataRow
+        'Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
         Dim sql0 As String
         Dim comm As New MySql.Data.MySqlClient.MySqlCommand
 
-        'str = GetDataSet("aws_structures", "Select * from aws_structures")
+        ' Create the structure details record in aws_structures table
+        If Len(txtStrName.Text) = 0 Or Len(txtDelimiter.Text) = 0 Or Len(txtHeaders.Text) = 0 Then
+            MsgBox("Values for Structure Name, Delimiter Type and Total Header Rows must all be provided!")
+            Exit Sub
+        End If
 
-        'dsNewRow = str.Tables("aws_structures").NewRow
-        'dsNewRow.Item("strName") = txtStrName.Text
-        'dsNewRow.Item("data_delimiter") = txtDelimiter.Text
-        'dsNewRow.Item("hdrRows") = txtHeaders.Text
-        'dsNewRow.Item("txtQualifier") = txtQualifier.Text
+        Try
+            comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
+            'sql0 = "INSERT INTO `mysql_climsoft_db_v4`.`aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
+            sql0 = "INSERT INTO `aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
 
-        ''Add a new record to the data source table
-        'str.Tables("aws_structures").Rows.Add(dsNewRow)
-        'da.Update(str, "aws_structures")
+            comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            comm.ExecuteNonQuery()   ' Execute the query
 
-        'recEdit.messageBoxCommit()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
 
-        comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
-        'sql0 = "INSERT INTO `mysql_climsoft_db_v4`.`aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
-        sql0 = "INSERT INTO `aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
-
-        comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
-        comm.ExecuteNonQuery()   ' Execute the query
-
-
-        '' Create a table for the new structure
-
-        '        CREATE TABLE `aws_rwanda4` (
-        '	`Cols` INT(11) NOT NULL,
-        '	`Element_Name` VARCHAR(20) NULL DEFAULT NULL,
-        '	`Element_Abbreviation` VARCHAR(20) NULL DEFAULT NULL,
-        '	`Element_Details` VARCHAR(25) NULL DEFAULT NULL,
-        '	`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL,
-        '	`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL,
-        '	`unit` VARCHAR(15) NULL DEFAULT NULL,
-        '	`lower_limit` VARCHAR(10) NULL DEFAULT NULL,
-        '	`upper_limit` VARCHAR(10) NULL DEFAULT NULL,
-        '	`obsv` VARCHAR(25) NULL DEFAULT NULL,
-        '	PRIMARY KEY (`Cols`)
-        ')
-        'COLLATE='utf8_general_ci'
-        '        ENGINE = InnoDB
-        ';
+        ' Create a table for the new structure
         Dim tbl As String = txtStrName.Text
-        'sql0 = "CREATE TABLE `mysql_climsoft_db_v4`.`" & txtStrName.Text & "` " & _
-        sql0 = "CREATE TABLE `" & txtStrName.Text & "` " & _
-               "( " & _
-                "`Cols` INT NOT NULL, " & _
-                "`Element_abbreviation` VARCHAR(20) NULL DEFAULT NULL, " & _
-                "`Element_Name` VARCHAR(20) NULL DEFAULT NULL, " & _
-                "`Element_Details` VARCHAR(25) NULL DEFAULT NULL, " & _
-                "`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
-                "`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
-                "`unit` VARCHAR(15) NULL DEFAULT NULL, " & _
-                "`lower_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
-                "`upper_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
-                "`obsv` VARCHAR(25) NULL DEFAULT NULL, " & _
-                "UNIQUE KEY `identification` (`Cols`) " & _
-             ") COLLATE='utf8_general_ci';"
-        'MsgBox(sql0)
 
+        Try
 
+            sql0 = "CREATE TABLE `" & txtStrName.Text & "` " & _
+                   "( " & _
+                    "`Cols` INT NOT NULL, " & _
+                    "`Element_abbreviation` VARCHAR(20) NULL DEFAULT NULL, " & _
+                    "`Element_Name` VARCHAR(20) NULL DEFAULT NULL, " & _
+                    "`Element_Details` VARCHAR(25) NULL DEFAULT NULL, " & _
+                    "`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
+                    "`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
+                    "`unit` VARCHAR(15) NULL DEFAULT NULL, " & _
+                    "`lower_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
+                    "`upper_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
+                    "`obsv` VARCHAR(25) NULL DEFAULT NULL, " & _
+                    "UNIQUE KEY `identification` (`Cols`) " & _
+                 ") COLLATE='utf8_general_ci';"
 
-        comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
-        comm.ExecuteNonQuery()   ' Execute the query
+            comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            comm.ExecuteNonQuery()   ' Execute the query
 
-        ' Display the created table on the DataGrid
+            ' Display the created table on the DataGrid
 
-        DataGridFill(txtStrName.Text)
-        FillList(cmbExistingStructures, "aws_structures", "strName")
-        cmbExistingStructures.Refresh()
-        Exit Sub
-Err:
-        MsgBox(Err.Number & " : " & Err.Description)
+            DataGridFill(txtStrName.Text)
+            FillList(cmbExistingStructures, "aws_structures", "strName")
+            cmbExistingStructures.Refresh()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
+
+        MsgBox("The data structure: " & txtStrName.Text & " successfully created")
+        '        Exit Sub
+        'Err:
+        '        MsgBox(Err.Number & " : " & Err.Description)
     End Sub
 
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
@@ -782,8 +770,25 @@ Err:
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-        DeleteRecord("aws_structures", Int(Strings.Right(lblRecords.Text, 1)) - 1)
-        FillList(cmbExistingStructures, "aws_structures", "strName")
+        Try
+            If Not IsNumeric(Strings.Right(lblRecords.Text, 1)) Then ' No data structure selected
+                MsgBox("Nothing to delete")
+                Exit Sub
+            End If
+            If MsgBox("The data structure " & txtStrName.Text & " will be deleted.", MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Exit Sub
+            DeleteRecord("aws_structures", Int(Strings.Right(lblRecords.Text, Len(lblRecords.Text) - 5)) - 1)
+            FillList(cmbExistingStructures, "aws_structures", "strName")
+            ' Clear text boxes
+            txtStrName.Text = ""
+            txtDelimiter.Text = ""
+            txtHeaders.Text = ""
+            txtQualifier.Text = ""
+            cmbExistingStructures.Text = ""
+            ' Hide Data grid view
+            DataGridViewStructures.Visible = False
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Sub DataGridFill(tbl As String)
@@ -1255,6 +1260,7 @@ Err:
         'MsgBox("Process_input_data")
         Log_Errors(Err.Number & ": " & Err.Description & " at process_input_data")
         Me.Cursor = Cursors.Default
+        FileClose(1)
         FileClose(10)
         FileClose(11)
         FileClose(30)
@@ -1944,6 +1950,8 @@ Err:
         ss = DateAndTime.Second(Date_Time)
         wmo_id = 63999
 
+        msg_header = txtMsgHeader.Text
+
         BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
 
         Process_Status("Updating TDCF Template with observations ")
@@ -2026,7 +2034,9 @@ Err:
 
         ' ' Compose the complete AWS BUFR message
         '
-        ' If Not AWS_BUFR_Code(sql, header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors "Can't Encode Data"  ' MsgBox "Can't Encode Data"
+        'If Not AWS_BUFR_Code(sql, msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
+
+        If Not AWS_BUFR_Code(msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
 
         Exit Sub
 Err:
@@ -2797,7 +2807,7 @@ Err:
         'Open fso.GetParentFolderName(App.Path) & "\data\bufr_octets.txt" For Output As #1
         FileOpen(1, BUFR_octet_File, OpenMode.Output)
 
-
+        'WriteBytes(AWS_BUFR_File, BUFR_Message)
         If File.Exists(AWS_BUFR_File) Then File.Delete(AWS_BUFR_File)
 
         'Open AWS_BUFR_File For Binary As #2
@@ -2808,8 +2818,8 @@ Err:
         Dim kounter As Long
 
         'Dim writeStream As FileStream
-        'writeStream = New FileStream(AWS_BUFR_File, FileMode.Create)
-        'Dim writeBinay As New BinaryWriter(writeStream)
+        ''writeStream = New FileStream(AWS_BUFR_File, FileMode.Create)
+        ''Dim writeBinay As New BinaryWriter(writeStream)
         'writeBinay.Write(89)
 
 
@@ -2817,11 +2827,11 @@ Err:
         kounter = 1
         ''MsgBox(kount)
         For kount = 1 To Len(BUFR_Message) Step 8
-            If Binary_Decimal(Mid(BUFR_Message, kount, 8), byt) Then
+            If Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), byt) Then
                 'writeBinay.Write(byt)
-                'writeBinay.Write(Binary_Decimal(Mid(BUFR_Message, kount, 8)))
+                'writeBinay.Write(Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), 8))
                 'Write(2, kounter, Binary_Decimal(Mid(BUFR_Message, kount, 8)))
-                FilePut(2, byt, kounter)
+                FilePut(2, Strings.Mid(BUFR_Message, kount, 8), kounter)
                 'FilePutObject(2, byt, kounter)
                 'PrintLine(1, kounter & "," & Mid(BUFR_Message, kount, 8))
                 kounter = kounter + 1
@@ -2845,7 +2855,7 @@ Err:
         '    bin_out = bin_out & dat
         'Loop
 
-        'FileClose(1)
+        FileClose(1)
 
         'MsgBox msg_file
         Dim bufr_filename As String
@@ -2855,7 +2865,7 @@ Err:
         If Not FTP_Call(bufr_filename, "put") Then Exit Function
 
         AWS_BUFR_Code = True
-
+        'WriteBytes(AWS_BUFR_File, BUFR_Message)
         Exit Function
 Err:
         If Err.Description = "" Then
@@ -2871,6 +2881,87 @@ Err:
         FileClose(2)
         'writeBinay.Close()
     End Function
+
+    Sub WriteBytes(fl As String, dat As String)
+
+        'Dim myFileStream As FileStream
+        'Dim bteWrite() As Byte
+        'Dim intByte As Integer
+        'Dim lngLoop As Long
+
+        'Try
+        '    'intByte = Encoding.ASCII.GetBytes("asdf").Length
+        '    'ReDim bteWrite(intByte)
+        '    'bteWrite = Encoding.ASCII.GetBytes("asdf")
+        '    'myFileStream = File.OpenWrite("test.txt")
+        '    myFileStream = File.OpenWrite("test.txt")
+        '    'For lngLoop = 0 To intByte - 1
+        '    'For i = 0 To 7
+        '    myFileStream.WriteByte("1111111")
+        '    'Next i
+        '    'Next
+
+        '    myFileStream.Close()
+        'Catch ex As IOException
+        '    Console.WriteLine(ex.Message)
+        'End Try
+        Dim byt As Long
+        Const fileName As String = "Test#@@#.dat"
+
+        ' Create random data to write to the file.
+        Dim dataArray(8) As Byte
+        'Dim dataArray(4) As Byte
+        Dim randomGenerator As New Random()
+        randomGenerator.NextBytes(dataArray)
+        'byt = ""
+        'For i = 0 To 7
+        '    byt = byt & dataArray(i)
+
+        'MsgBox(byt)
+
+        Dim fileStream As FileStream = _
+            New FileStream(fileName, FileMode.Create)
+        Try
+            Dim kounts As Long
+            byt = ""
+            For kounts = 1 To Len(dat) Step 8
+                If Binary_Decimal(Strings.Mid(dat, kounts, 8), byt) Then
+
+                    If IsNumeric(byt) Then fileStream.WriteByte(byt)
+                End If
+            Next
+        Catch ex As Exception
+            MsgBox(byt)
+        End Try
+        'Try
+
+        '    ' Write the data to the file, byte by byte.
+        '    For i As Integer = 0 To dataArray.Length - 1
+        '        fileStream.WriteByte(dataArray(i))
+        '    Next i
+
+        '    ' Set the stream position to the beginning of the stream.
+        '    fileStream.Seek(0, SeekOrigin.Begin)
+
+        '    ' Read and verify the data.
+        '    For i As Integer = 0 To _
+        '        CType(fileStream.Length, Integer) - 1
+
+        '        If dataArray(i) <> fileStream.ReadByte() Then
+        '            Console.WriteLine("Error writing data.")
+        '            Return
+        '        End If
+        '    Next i
+        '    Console.WriteLine("The data was written to {0} " & _
+        '        "and verified.", fileStream.Name)
+        'Finally
+        '    fileStream.Close()
+        'End Try
+
+        fileStream.Close()
+
+    End Sub
+
 
     Function Binary_Decimal(BinN As String, ByRef BinD As Long) As Boolean
         On Error GoTo Err

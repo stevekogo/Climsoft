@@ -1191,7 +1191,7 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
         Me.pnlDataStructures.Location = New System.Drawing.Point(196, 115)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(734, 240)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(734, 204)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
@@ -1220,11 +1220,11 @@ Partial Class formAWSRealTime
         'lblStructure
         '
         Me.lblStructure.AutoSize = True
-        Me.lblStructure.Location = New System.Drawing.Point(22, 29)
+        Me.lblStructure.Location = New System.Drawing.Point(11, 29)
         Me.lblStructure.Name = "lblStructure"
-        Me.lblStructure.Size = New System.Drawing.Size(107, 13)
+        Me.lblStructure.Size = New System.Drawing.Size(146, 13)
         Me.lblStructure.TabIndex = 8
-        Me.lblStructure.Text = "Select Data structure"
+        Me.lblStructure.Text = "Select Existing Data structure"
         '
         'grpStructures
         '
@@ -1353,9 +1353,9 @@ Partial Class formAWSRealTime
         'cmbExistingStructures
         '
         Me.cmbExistingStructures.FormattingEnabled = True
-        Me.cmbExistingStructures.Location = New System.Drawing.Point(132, 25)
+        Me.cmbExistingStructures.Location = New System.Drawing.Point(163, 25)
         Me.cmbExistingStructures.Name = "cmbExistingStructures"
-        Me.cmbExistingStructures.Size = New System.Drawing.Size(130, 21)
+        Me.cmbExistingStructures.Size = New System.Drawing.Size(146, 21)
         Me.cmbExistingStructures.TabIndex = 1
         '
         'pnlServers
@@ -1909,7 +1909,7 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox4)
         Me.pnlMsgEncoding.Location = New System.Drawing.Point(196, 194)
         Me.pnlMsgEncoding.Name = "pnlMsgEncoding"
-        Me.pnlMsgEncoding.Size = New System.Drawing.Size(734, 48)
+        Me.pnlMsgEncoding.Size = New System.Drawing.Size(734, 100)
         Me.pnlMsgEncoding.TabIndex = 4
         Me.pnlMsgEncoding.Visible = False
         '
